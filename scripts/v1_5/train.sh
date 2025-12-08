@@ -1,14 +1,5 @@
 #!/bin/bash
-#SBATCH -N 1                     # Request 2 nodes
-#SBATCH --ntasks-per-node=1        # 1 task per node
-#SBATCH --cpus-per-task=32         # Number of CPU cores per task (adjust as needed)
-#SBATCH --gres=gpu:8               # Request 8 GPUs per node (total 16 GPUs across 2 nodes)
-#SBATCH --account=reasoning
-#SBATCH --partition=mb-h100        # Specify partition
-#SBATCH -t 7-00:00:00              # Set the maximum runtime (7 days)
-#SBATCH --job-name=144
-#SBATCH --mem=512GB                # Memory allocation per node
-#SBATCH --output=144.log  # Output file for logs
+
 export PYTHONPATH=${ROOT}:${PATH}
 
 export WANDB_MODE=offline
