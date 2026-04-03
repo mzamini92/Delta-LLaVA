@@ -116,7 +116,16 @@ def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, l
                     model_base,
                     low_cpu_mem_usage=True,
                     **kwargs
-                )                        
+                )     
+            elif "llava_seed_oss" in model_name.lower():
+                print("Loading llava_seed_oss2 model1...")
+                tokenizer = transformers.AutoTokenizer.from_pretrained(model_base)
+                cfg_pretrained = AutoConfig.from_pretrained(model_path)
+                model = LlavaSeedOssForCausalLM.from_pretrained(
+                    model_base,
+                    low_cpu_mem_usage=True,
+                    **kwargs
+                )                      
             else: 
                 # raise NotImplemented("LLaVA model not found. Please check the model name.")
                 print("Loading LLaVA model1...")
@@ -156,7 +165,15 @@ def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, l
                     model_path,
                     low_cpu_mem_usage=True,
                     **kwargs
-                )                
+                )   
+            elif "llava_seed_oss" in model_name.lower():        
+                print("Loading llava_seed_oss model...")
+                tokenizer = AutoTokenizer.from_pretrained(model_path, use_fast=False)
+                model = LlavaSeedOssForCausalLM.from_pretrained(
+                    model_path,
+                    low_cpu_mem_usage=True,
+                    **kwargs
+                )     
             else:
                 print("Loading LLaVA model...")
                 # raise NotImplemented("LLaVA model not found. Please check the model name.")
