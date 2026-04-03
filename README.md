@@ -2,10 +2,10 @@
 
 # Delta-LLaVA Hermes-4.3-36B
 
-## Delta-LLaVA: Base-then-Specialize Alignment for Token-Efficient Vision-Language Models [[Paper]](https://openaccess.thecvf.com/content/WACV2026/papers/Zamini_Delta-LLaVA_Base-then-Specialize_Alignment_for_Token-Efficient_Vision-Language_Models_WACV_2026_paper.pdf)
+## Delta-LLaVA: Base-then-Specialize Alignment for Token-Efficient Vision-Language Models 
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/5d217aa5-4e00-4327-9584-4d37018588fe" width="400"/>
+  <img src="https://github.com/user-attachments/assets/7b2265ac-3279-46db-9bbd-c82098c1a578" width="400"/>
 </p>
 
 <p align="justify">
