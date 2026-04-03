@@ -18,6 +18,7 @@ class SeparatorStyle(Enum):
     LLAMA_3_1 = auto()
     Phi3 = auto()
     GEMMA = auto()
+    Qwen3 = auto()
 
 
 @dataclasses.dataclass
@@ -152,6 +153,16 @@ class Conversation:
                     ret += message + seps[i % 2]
                 else:
                     ret += ""
+        elif self.sep_style == SeparatorStyle.Qwen3:
+            ret = self.system + self.sep+'\n'
+            for i, (role, message) in enumerate(messages):
+                print('message',role, message)
+                if message:
+                    if type(message) is tuple:
+                        message, _, _ = message
+                    ret += role + "\n" + message + self.sep+'\n'
+                else:
+                    ret += role + "\n"
         else:
             raise ValueError(f"Invalid style: {self.sep_style}")
 
@@ -305,7 +316,14 @@ conv_vicuna_v1 = Conversation(
     sep=" ",
     sep2="</s>",
 )
-
+conv_hermes_43 = Conversation(
+    system="",                      # not used
+    roles=("user", "assistant"),   # not used
+    messages=(),
+    offset=0,
+    sep_style=SeparatorStyle.PLAIN,  # irrelevant
+    version="hermes_43",             # THIS is the key
+)
 conv_llama_2 = Conversation(
     system="""You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe.  Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
 
@@ -330,6 +348,16 @@ conv_llava_llama_2 = Conversation(
     sep_style=SeparatorStyle.LLAMA_2,
     sep="<s>",
     sep2="</s>",
+)
+
+hermes_2 = Conversation(
+    system="<|im_start|>system\nAnswer the questions.",
+    roles=("<|im_start|>user\n", "<|im_start|>assistant\n"),
+    sep_style=SeparatorStyle.MPT,
+    sep="<|im_end|>",
+    messages=(),
+    offset=0,
+    version="hermes-2",
 )
 
 conv_mpt = Conversation(
@@ -423,6 +451,7 @@ conv_mistral_instruct = Conversation(
     sep2="</s>",
 )
 
+
 conv_chatml_direct = Conversation(
     system="""<|im_start|>system
 Answer the questions.""",
@@ -431,6 +460,17 @@ Answer the questions.""",
     messages=(),
     offset=0,
     sep_style=SeparatorStyle.MPT,
+    sep="<|im_end|>",
+)
+
+
+conv_qwen3 =  Conversation(
+    system="<|im_start|>system\nYou are a helpful assistant.",
+    roles=("<|im_start|>user\n", "<|im_start|>assistant\n<think>\n\n</think>\n\n"),
+    version="qwen",
+    messages=(),
+    offset=0,
+    sep_style=SeparatorStyle.Qwen3,
     sep="<|im_end|>",
 )
 
@@ -444,38 +484,51 @@ conv_phi_3 = Conversation(
     sep_style=SeparatorStyle.Phi3,
     sep="<|end|>",
 )
-import os
-from transformers import AutoTokenizer
-tokenizer_path= "meta-llama/Meta-Llama-3-8B-Instruct"
+# import os
+# from transformers import AutoTokenizer
+# tokenizer_path= "meta-llama/Meta-Llama-3-8B-Instruct"
 
-llama_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
-conv_llava_llama_3 = Conversation(
-    system="You are a helpful language and vision assistant. " "You are able to understand the visual content that the user provides, " "and assist the user with a variety of tasks using natural language.",
-    #roles=("<|start_header_id|>user", "<|start_header_id|>assistant"),
-    roles=("user", "assistant"),
-    version="llama_3",
-    messages=[],
+# llama_tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
+conv_llama3 = Conversation(
+    system="""<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nA chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions.""",
+    roles=("<|start_header_id|>user<|end_header_id|>\n\n", "<|start_header_id|>assistant<|end_header_id|>\n\n"),
+    version="llama3",
+    messages=(),
     offset=0,
-    sep_style=SeparatorStyle.LLAMA_3,
-    tokenizer=llama_tokenizer,
-    stop_token_ids=[128009],
+    sep_style=SeparatorStyle.MPT,
+    sep="<|eot_id|>",
 )
-import os
-from transformers import AutoTokenizer
-tokenizer_path_3_1= "meta-llama/Llama-3.1-8B-Instruct"
 
-llama_tokenizer_3_1 = AutoTokenizer.from_pretrained(tokenizer_path)
-conv_llava_llama_3_1 = Conversation(
-    system="You are a helpful language and vision assistant. " "You are able to understand the visual content that the user provides, and assist the user with a variety of tasks using natural language.",
-    #roles=("<|start_header_id|>user", "<|start_header_id|>assistant"),
-    roles=("user", "assistant"),
-    version="llama_3_1",
-    messages=[],
+conv_llava_hermes_4 = Conversation(
+    system="""<|start_header_id|>system<|end_header_id|>
+
+You are a helpful language and vision assistant. You are able to understand the visual content that the user provides, and assist the user with a variety of tasks using natural language.""",
+    roles=(
+        "<|start_header_id|>user<|end_header_id|>\n\n",
+        "<|start_header_id|>assistant<|end_header_id|>\n\n",
+    ),
+    version="hermes_4",
+    messages=(),
     offset=0,
-    sep_style=SeparatorStyle.LLAMA_3_1,
-    tokenizer=llama_tokenizer_3_1,
-    stop_token_ids=[128009, 128008, 128001],
+    sep_style=SeparatorStyle.MPT,
+    sep="<|eot_id|>",
 )
+# import os
+# from transformers import AutoTokenizer
+# tokenizer_path_3_1= "meta-llama/Llama-3.1-8B-Instruct"
+
+# llama_tokenizer_3_1 = AutoTokenizer.from_pretrained(tokenizer_path)
+# conv_llava_llama_3_1 = Conversation(
+#     system="You are a helpful language and vision assistant. " "You are able to understand the visual content that the user provides, and assist the user with a variety of tasks using natural language.",
+#     #roles=("<|start_header_id|>user", "<|start_header_id|>assistant"),
+#     roles=("user", "assistant"),
+#     version="llama_3_1",
+#     messages=[],
+#     offset=0,
+#     sep_style=SeparatorStyle.LLAMA_3_1,
+#     tokenizer=llama_tokenizer_3_1,
+#     stop_token_ids=[128009, 128008, 128001],
+# )
 default_conversation = conv_vicuna_v1
 conv_templates = {
     "default": conv_vicuna_v0,
@@ -494,10 +547,14 @@ conv_templates = {
     "llava_v1": conv_llava_v1,
     "v1_mmtag": conv_llava_v1_mmtag,
     "llava_llama_2": conv_llava_llama_2,
-    "llama_3": conv_llava_llama_3,
-    "llama_3_1": conv_llava_llama_3_1,
+    "llama3": conv_llama3,
+    # "llama_3_1": conv_llava_llama_3_1,
     "phi_3": conv_phi_3,
     "gemma": conv_gemma,
+    "qwen3": conv_qwen3,
+    "hermes_43": conv_hermes_43,
+    "hermes-2": hermes_2,
+    "hermes-4": conv_llava_hermes_4,
 
     "mpt": conv_mpt,
 }
