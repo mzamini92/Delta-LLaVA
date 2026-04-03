@@ -1,21 +1,6 @@
----
-license: apache-2.0
-language:
-  - en
-base_model:
-  - NousResearch/Hermes-4.3-36B
-library_name: transformers
-pipeline_tag: image-text-to-text
-tags:
-  - llava
-  - vision-language
-  - multimodal
-  - hermes-4.3
-  - seed-oss
-  - delta-llava
----
 
-# Delta-LLaVA Hermes-4.3-36B
+
+# Delta-LLaVA Hermes-4.3-36B ([LINK](https://huggingface.co/mzamini/DeltaLLaVA-36B-144))
 
 ## Delta-LLaVA: Base-then-Specialize Alignment for Token-Efficient Vision-Language Models [[Paper]](https://openaccess.thecvf.com/content/WACV2026/papers/Zamini_Delta-LLaVA_Base-then-Specialize_Alignment_for_Token-Efficient_Vision-Language_Models_WACV_2026_paper.pdf)
 
