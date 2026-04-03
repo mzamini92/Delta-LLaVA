@@ -1,6 +1,6 @@
 
 
-# Delta-LLaVA Hermes-4.3-36B ([LINK](https://huggingface.co/mzamini/DeltaLLaVA-36B-144))
+# Delta-LLaVA Hermes-4.3-36B
 
 ## Delta-LLaVA: Base-then-Specialize Alignment for Token-Efficient Vision-Language Models [[Paper]](https://openaccess.thecvf.com/content/WACV2026/papers/Zamini_Delta-LLaVA_Base-then-Specialize_Alignment_for_Token-Efficient_Vision-Language_Models_WACV_2026_paper.pdf)
 
@@ -18,12 +18,9 @@ It uses the `hermes_43` chat template and a LLaVA-style multimodal stack.
 
 If you use this repository or model, please cite our Delta-LLaVA paper.
 
-## Project Home
+## Download 36 B Parameter model from HuggingFace  ([LINK](https://huggingface.co/mzamini/DeltaLLaVA-36B-144))
 
-GitHub repository: [mzamini92/Delta-LLaVA](https://github.com/mzamini92/Delta-LLaVA/)
 
-This work has been heavily built on top of [TokenPacker](https://github.com/CircleRadon/TokenPacker).
-Thanks to the TokenPacker authors for their great work.
 
 ## Model Details
 
