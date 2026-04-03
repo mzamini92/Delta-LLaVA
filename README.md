@@ -5,7 +5,7 @@
 ## Delta-LLaVA: Base-then-Specialize Alignment for Token-Efficient Vision-Language Models 
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/7b2265ac-3279-46db-9bbd-c82098c1a578" width="400"/>
+  <img src="https://github.com/mzamini92/Delta-LLaVA/blob/main/assets/IMG_4366.PNG" width="400"/>
 </p>
 
 <p align="justify">
